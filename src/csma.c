@@ -98,7 +98,7 @@ void add_nodes(Network* network, int N, int* R, int M){
 void simulate(Network* network,int T){
     for (CLOCK = 0; CLOCK < T; CLOCK++)
     {
-        printf("%d \n",CLOCK);
+        //printf("%d \n",CLOCK);
     }
     
 }
