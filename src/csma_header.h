@@ -1,5 +1,5 @@
 /** @file csma_header.h
- * @brief Structure for nodes
+ * @brief Structure for nodes, network, and initalization functions.
  * 
  *
  *
@@ -32,6 +32,7 @@ typedef struct Node {
     int M;
     int collision_count;
     int backoff;
+    int tx_start_time;
 } Node;
 
 /** @brief Structure definition for single node
@@ -46,6 +47,7 @@ Node* create_node(int id, int R_min, int M) {
     node->R = R_min;
     node->M = M;
     node->collision_count = 0;
+    node->backoff = id;
     return node;
 }
 

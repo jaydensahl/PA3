@@ -1,15 +1,11 @@
 /** @file csma.c
- * @brief Insert Brief here. 
- * 
- * Main function for CSMA
+ * @brief Main function for CSMA (Carrier Sense Multiple Access)
  *
  *
  * @author Jayden Sahl (jaydensahl)
  * @author Yousaf Nazari (yousafnazari)
  *
  * @bug No known Bugs.
- *
- *
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,10 +15,24 @@
 //global clock for all nodes
 int CLOCK;
 
+/** @brief Write the output link utilization rate
+ *          to the output file, "output.txt"
+ * 
+ * @param link_util Link utilization rate
+ * 
+ * @return Void.
+*/
+void output(double link_util){
+    FILE *file = fopen("output.txt", "w");
+    if (file == NULL){
+        printf("Error opening file\n");
+        return;
+    }
+    fprintf(file, "%.2f", link_util);
+    fclose(file);   
+}
 // 
 /** @brief Function to read configuration parameters from the input file.
- *
- *  
  *
  *  @param filename input file to read from
  *  @param N Number of nodes
@@ -42,7 +52,7 @@ void readInput(char *filename, int *N, int *L, int *M, int *R, int *T) {
 
     char param;
     int value, i;
-
+    // check for input variable and read the number after it
     while(fscanf(file," %c", &param) != EOF){
         switch(param){
             case 'N':
@@ -69,7 +79,7 @@ void readInput(char *filename, int *N, int *L, int *M, int *R, int *T) {
                 break;
         }
     }
-    fclose(file);
+    fclose(file); 
 }
 
 /** @brief Add nodes to the network and assign values to them.
@@ -83,8 +93,8 @@ void readInput(char *filename, int *N, int *L, int *M, int *R, int *T) {
  *  @return Void.
  */
 void add_nodes(Network* network, int N, int* R, int M){
-    // 
-    for(int i = 1; i <= N; i++){
+    // add data into each new node
+    for(int i = 0; i < N; i++){
         network->nodes[i] = create_node(i,R[0],M);
     }
 }
@@ -95,14 +105,94 @@ void add_nodes(Network* network, int N, int* R, int M){
  *  @param T simulation time
  *  @return Void.
  */
-void simulate(Network* network,int T){
+void simulate(Network* network, int T, int* R, int L){
+    int channelOccupied = 0; // busy channel flag
+    int successful_transmissions = 0; // counter for successful transmissions    
+    int transmitting_nodes = 0;
+    int tx_done = 0;
+    Node* transmitting_node; // identify which node is transmitting
+    // simulate in "sync" with clock cycles
     for (CLOCK = 0; CLOCK < T; CLOCK++)
     {
-        //printf("%d \n",CLOCK);
+        // to print the table of backoff values
+        //printf("clock: %d\n", CLOCK);
+        for (int i = 0; i < network->num_nodes; i++){
+            // to print the table of backoff values
+            //printf("Node %d backoff: %d\n", network->nodes[i]->id,network->nodes[i]->backoff);
+        }
+        tx_done = 0;
+
+        // iterate over all nodes (in order)
+        for (int i = 0; i < network->num_nodes; i++){
+            Node* node = network->nodes[i];
+                
+            // if channel is not occupied and node backoff = 0, begin transmitting
+            if (!channelOccupied && node->backoff == 0){
+                transmitting_nodes++;
+                transmitting_node = node;
+                node->tx_start_time = 0;
+            }        
+        }
+        // if only one node is transmitting, increment susccessful transmissions
+        if (transmitting_nodes == 1){
+            successful_transmissions++;
+            channelOccupied = 1;
+            transmitting_node->tx_start_time++;
+            if (transmitting_node->tx_start_time >= L){           
+                transmitting_node->backoff = (transmitting_node->id + CLOCK+1) % transmitting_node->R;
+                transmitting_node->tx_start_time=0;
+                tx_done = 1;
+            }
+        }
+        // else if more than one node is "transmitting", handle collisions
+        else if(transmitting_nodes > 1){
+            channelOccupied = 1;
+            // handle collision for each node
+            for (int i = 0; i < network->num_nodes; i++){
+                Node* node = network->nodes[i];
+                if(node->backoff == 0){
+                    node->collision_count++;
+                    // if collision count is less than max, increment R value
+                    if (node->collision_count < node->M){
+                        node->R = R[node->collision_count]; 
+                    }
+                    // else reset collision count and R
+                    else{
+                        node->collision_count = 0;
+                        node->R = R[node->collision_count]; 
+                    }
+                    node->backoff = (node->id + CLOCK+1) % node->R;
+                }
+            }
+            tx_done = 1;
+        }
+        // if the channel was unoccupied, decrement backoff for all nodes
+        for (int i = 0; i < network->num_nodes; i++){
+            Node* node = network->nodes[i];
+            if(!channelOccupied){
+                node->backoff--;
+            }
+        }
+        // after packet transmission is complete, reset flags
+        if(tx_done){
+            // reset channel occupied flag
+            transmitting_nodes = 0;
+            channelOccupied = 0;
+        }
     }
-    
+    double link_util = (double)successful_transmissions / T;
+    output(link_util);
 }
 
+/** @brief main function
+ *  reads input file
+ *  creates network
+ *  creates nodes and assigns values to them
+ * 
+ * @param input from command line
+ * 
+ * @return 1
+*/
 int main(int argc, char** argv) {
     // check command line arguments
     if (argc != 2) {
@@ -121,7 +211,7 @@ int main(int argc, char** argv) {
     Network* network = create_network(N);
     add_nodes(network, N, R, M);
     // Run simulation
-    simulate(network,T);
+    simulate(network, T, R, L);
     // Evaluate network utilization
 
     return(EXIT_SUCCESS);
