@@ -9,6 +9,6 @@ Status of the project:
 
 How to run:
 - 'make' binaries
-- from src folder, run ./csma <inputFileName>
-- <inputFileName> is named according to the input file provided
+- from src folder, run ./csma inputFileName
+- inputFileName is named according to the input file provided
 
