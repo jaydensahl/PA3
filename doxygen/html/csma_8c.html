@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PA3: csma.c File Reference</title>
+<title>PA3: C:/Users/User/Documents/GitHub/PA3/src/csma.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,16 +103,17 @@ $(function(){initNavTree('csma_8c.html',''); initResizable(); });
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;assert.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="csma__header_8h_source.html">csma_header.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8e9aef7cfe2cb1b3cb6b607276c85c7c" id="r_a8e9aef7cfe2cb1b3cb6b607276c85c7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e9aef7cfe2cb1b3cb6b607276c85c7c">output</a> (double link_util)</td></tr>
-<tr class="memdesc:a8e9aef7cfe2cb1b3cb6b607276c85c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the output link utilization rate to the output file, "output.txt".  <br /></td></tr>
-<tr class="separator:a8e9aef7cfe2cb1b3cb6b607276c85c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50e812fe55dea398ed98fb2372bcd7c2" id="r_a50e812fe55dea398ed98fb2372bcd7c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50e812fe55dea398ed98fb2372bcd7c2">readInput</a> (char *filename, int *N, int *L, int *M, int *R, int *T)</td></tr>
-<tr class="memdesc:a50e812fe55dea398ed98fb2372bcd7c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to read configuration parameters from the input file.  <br /></td></tr>
-<tr class="separator:a50e812fe55dea398ed98fb2372bcd7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b9aa74ca32dd7c6c4dadb589c4a47b0" id="r_a2b9aa74ca32dd7c6c4dadb589c4a47b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b9aa74ca32dd7c6c4dadb589c4a47b0">output</a> (char *filename, double link_util)</td></tr>
+<tr class="memdesc:a2b9aa74ca32dd7c6c4dadb589c4a47b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the output link utilization rate to the output file, "output.txt".  <br /></td></tr>
+<tr class="separator:a2b9aa74ca32dd7c6c4dadb589c4a47b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece21da85677c7fdb678d4b4db3c5b1f" id="r_aece21da85677c7fdb678d4b4db3c5b1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aece21da85677c7fdb678d4b4db3c5b1f">readInput</a> (char *filename, int *N, int *L, int *M, int **R, int *T)</td></tr>
+<tr class="memdesc:aece21da85677c7fdb678d4b4db3c5b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to read configuration parameters from the input file.  <br /></td></tr>
+<tr class="separator:aece21da85677c7fdb678d4b4db3c5b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a974f74c6f3fa39b0d958613196186f97" id="r_a974f74c6f3fa39b0d958613196186f97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a974f74c6f3fa39b0d958613196186f97">add_nodes</a> (<a class="el" href="struct_network.html">Network</a> *network, int N, int *R, int M)</td></tr>
 <tr class="memdesc:a974f74c6f3fa39b0d958613196186f97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add nodes to the network and assign values to them.  <br /></td></tr>
 <tr class="separator:a974f74c6f3fa39b0d958613196186f97"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,8 +121,20 @@ Functions</h2></td></tr>
 <tr class="memdesc:a79ac936ba45951a82f0fa53ec1935483"><td class="mdescLeft">&#160;</td><td class="mdescRight">simulate the transmissions on the network for time T  <br /></td></tr>
 <tr class="separator:a79ac936ba45951a82f0fa53ec1935483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function reads input file creates network creates nodes and assigns values to them  <br /></td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function reads input file creates network creates nodes and assigns values to them simulates network traffic  <br /></td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e4e9da25c6bf036fd592ac0e0144985" id="r_a0e4e9da25c6bf036fd592ac0e0144985"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e4e9da25c6bf036fd592ac0e0144985">test_output</a> ()</td></tr>
+<tr class="memdesc:a0e4e9da25c6bf036fd592ac0e0144985"><td class="mdescLeft">&#160;</td><td class="mdescRight">test function for output calls output function with a test value for link_util writes test link_util value to an test output file and then reads the value and verifies  <br /></td></tr>
+<tr class="separator:a0e4e9da25c6bf036fd592ac0e0144985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ec798d6441ce86db2dd9407e1b840a0" id="r_a0ec798d6441ce86db2dd9407e1b840a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ec798d6441ce86db2dd9407e1b840a0">test_readInput</a> ()</td></tr>
+<tr class="memdesc:a0ec798d6441ce86db2dd9407e1b840a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">test function for readInput creates test input file calls readInput function and verifies the values read for N, L, M, R, T  <br /></td></tr>
+<tr class="separator:a0ec798d6441ce86db2dd9407e1b840a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfaeebd38a5f101038e41cf7f19da690" id="r_adfaeebd38a5f101038e41cf7f19da690"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfaeebd38a5f101038e41cf7f19da690">test_add_nodes</a> ()</td></tr>
+<tr class="memdesc:adfaeebd38a5f101038e41cf7f19da690"><td class="mdescLeft">&#160;</td><td class="mdescRight">test function for add_nodes creates example network with test values for N, M and R calls add_nodes function and verifies if nodes parameters are set correctly  <br /></td></tr>
+<tr class="separator:adfaeebd38a5f101038e41cf7f19da690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3c9c2436729a290205c2b6acd51199e" id="r_ab3c9c2436729a290205c2b6acd51199e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3c9c2436729a290205c2b6acd51199e">test_simulate</a> ()</td></tr>
+<tr class="memdesc:ab3c9c2436729a290205c2b6acd51199e"><td class="mdescLeft">&#160;</td><td class="mdescRight">test function for simulate creates a test network with test values for N, M, R, L, T calls add_nodes, and simulate functions and validates that output file exists afterwards  <br /></td></tr>
+<tr class="separator:ab3c9c2436729a290205c2b6acd51199e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -198,7 +211,7 @@ Yousaf Nazari (yousafnazari)</dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>main function reads input file creates network creates nodes and assigns values to them </p>
+<p>main function reads input file creates network creates nodes and assigns values to them simulates network traffic </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">input</td><td>from command line</td></tr>
@@ -206,11 +219,12 @@ Yousaf Nazari (yousafnazari)</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>1 </dd></dl>
+<p>calling test functions uncomment this block to test functions above</p>
 
 </div>
 </div>
-<a id="a8e9aef7cfe2cb1b3cb6b607276c85c7c" name="a8e9aef7cfe2cb1b3cb6b607276c85c7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e9aef7cfe2cb1b3cb6b607276c85c7c">&#9670;&#160;</a></span>output()</h2>
+<a id="a2b9aa74ca32dd7c6c4dadb589c4a47b0" name="a2b9aa74ca32dd7c6c4dadb589c4a47b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b9aa74ca32dd7c6c4dadb589c4a47b0">&#9670;&#160;</a></span>output()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -218,8 +232,12 @@ Yousaf Nazari (yousafnazari)</dd></dl>
         <tr>
           <td class="memname">void output </td>
           <td>(</td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>link_util</em></span></td><td>)</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>filename</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>link_util</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -235,8 +253,8 @@ Yousaf Nazari (yousafnazari)</dd></dl>
 
 </div>
 </div>
-<a id="a50e812fe55dea398ed98fb2372bcd7c2" name="a50e812fe55dea398ed98fb2372bcd7c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50e812fe55dea398ed98fb2372bcd7c2">&#9670;&#160;</a></span>readInput()</h2>
+<a id="aece21da85677c7fdb678d4b4db3c5b1f" name="aece21da85677c7fdb678d4b4db3c5b1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aece21da85677c7fdb678d4b4db3c5b1f">&#9670;&#160;</a></span>readInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,7 +282,7 @@ Yousaf Nazari (yousafnazari)</dd></dl>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>R</em>, </span></td>
+          <td class="paramtype">int **</td>          <td class="paramname"><span class="paramname"><em>R</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -331,12 +349,92 @@ Yousaf Nazari (yousafnazari)</dd></dl>
 
 </div>
 </div>
+<a id="adfaeebd38a5f101038e41cf7f19da690" name="adfaeebd38a5f101038e41cf7f19da690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfaeebd38a5f101038e41cf7f19da690">&#9670;&#160;</a></span>test_add_nodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_add_nodes </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>test function for add_nodes creates example network with test values for N, M and R calls add_nodes function and verifies if nodes parameters are set correctly </p>
+<dl class="section return"><dt>Returns</dt><dd>Void </dd></dl>
+
+</div>
+</div>
+<a id="a0e4e9da25c6bf036fd592ac0e0144985" name="a0e4e9da25c6bf036fd592ac0e0144985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e4e9da25c6bf036fd592ac0e0144985">&#9670;&#160;</a></span>test_output()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_output </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>test function for output calls output function with a test value for link_util writes test link_util value to an test output file and then reads the value and verifies </p>
+<dl class="section return"><dt>Returns</dt><dd>Void </dd></dl>
+
+</div>
+</div>
+<a id="a0ec798d6441ce86db2dd9407e1b840a0" name="a0ec798d6441ce86db2dd9407e1b840a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ec798d6441ce86db2dd9407e1b840a0">&#9670;&#160;</a></span>test_readInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_readInput </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>test function for readInput creates test input file calls readInput function and verifies the values read for N, L, M, R, T </p>
+<dl class="section return"><dt>Returns</dt><dd>Void </dd></dl>
+
+</div>
+</div>
+<a id="ab3c9c2436729a290205c2b6acd51199e" name="ab3c9c2436729a290205c2b6acd51199e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3c9c2436729a290205c2b6acd51199e">&#9670;&#160;</a></span>test_simulate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_simulate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>test function for simulate creates a test network with test values for N, M, R, L, T calls add_nodes, and simulate functions and validates that output file exists afterwards </p>
+<dl class="section return"><dt>Returns</dt><dd>Void </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="csma_8c.html">csma.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="csma_8c.html">csma.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>

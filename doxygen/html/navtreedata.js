@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "PA3", "index.html", [
+    [ "ELEC 331 Programming Assignment 3", "index.html", null ],
     [ "Bug List", "bug.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],

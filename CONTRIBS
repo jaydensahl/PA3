@@ -1,0 +1,9 @@
+Jayden
+- wrote add_nodes function
+- wrote simulate function
+- wrote output function
+
+Yousaf
+- wrote node and network structure definitions and functions (header file)
+- wrote readInput function
+- wrote all test functions (test_reaInput, test_add_nodes, test_simulate, test_output)

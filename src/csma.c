@@ -201,6 +201,7 @@ void simulate(Network* network, int T, int* R, int L){
  *  reads input file
  *  creates network
  *  creates nodes and assigns values to them
+ *  simulates network traffic
  * 
  * @param input from command line
  * 
