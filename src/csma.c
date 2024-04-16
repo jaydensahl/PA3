@@ -42,7 +42,7 @@ void output(double link_util){
  *  @param T simulation time
  *  @return Void.
  */
-void readInput(char *filename, int *N, int *L, int *M, int *R, int *T) {
+void readInput(char *filename, int *N, int *L, int *M, int **R, int *T) {
     // TODO: Implement this function
     FILE *file = fopen(filename, "r");
     if (file == NULL){
@@ -51,7 +51,10 @@ void readInput(char *filename, int *N, int *L, int *M, int *R, int *T) {
     }
 
     char param;
-    int value, i;
+    int value, i, capacity_R = 2;
+    // allocate memory for R based on initial capacity
+    *R = malloc(capacity_R * sizeof(int));
+
     // check for input variable and read the number after it
     while(fscanf(file," %c", &param) != EOF){
         switch(param){
@@ -68,8 +71,15 @@ void readInput(char *filename, int *N, int *L, int *M, int *R, int *T) {
             case 'R':
                 i = 0;
                 while(fscanf(file, "%d", &value) == 1){
-                    R[i++] = value;
+                    //printf("%d\n", value);
+                    // check if R needs to reallocated
+                    if (i >= capacity_R) {
+                        capacity_R++;
+                        *R = realloc(*R, capacity_R * sizeof(int));
+                    }
+                    (*R)[i++] = value;
                 };
+                //printf("%d\n", i);
                 break;
             case 'T':
                 fscanf(file, "%d", T);
@@ -181,6 +191,7 @@ void simulate(Network* network, int T, int* R, int L){
         }
     }
     double link_util = (double)successful_transmissions / T;
+    printf("%.2f", link_util);
     output(link_util);
 }
 
@@ -201,12 +212,12 @@ int main(int argc, char** argv) {
     }
 
     char* filename = argv[1];
-    int length_R = 6; // this should not be a hardcoded value, needs to change
+    //int length_R = 6; // this should not be a hardcoded value, needs to change
 
     //CALL CSMA FUNCTIONS HERE
     // Read configuration parameters from input file
-    int N, L, M, R[length_R], T; 
-    readInput(filename, &N, &L, &M, R, &T);
+    int N, L, M, *R = NULL, T; 
+    readInput(filename, &N, &L, &M, &R, &T);
     // Initialize nodes
     Network* network = create_network(N);
     add_nodes(network, N, R, M);
