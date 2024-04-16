@@ -23,8 +23,8 @@ int CLOCK;
  * 
  * @return Void.
 */
-void output(double link_util){
-    FILE *file = fopen("output.txt", "w");
+void output(char* filename, double link_util){
+    FILE *file = fopen(filename, "w");
     if (file == NULL){
         printf("Error opening file\n");
         return;
@@ -32,6 +32,7 @@ void output(double link_util){
     fprintf(file, "%.2f", link_util);
     fclose(file);   
 }
+
 // 
 /** @brief Function to read configuration parameters from the input file.
  *
@@ -193,7 +194,7 @@ void simulate(Network* network, int T, int* R, int L){
     }
     double link_util = (double)successful_transmissions / T;
     printf("%.2f", link_util);
-    output(link_util);
+    output("output.txt", link_util);
 }
 
 /** @brief main function
@@ -232,8 +233,47 @@ int main(int argc, char** argv) {
      */
     //test_readInput();
     //test_add_nodes();
+    test_output();
     
     return(EXIT_SUCCESS);
+}
+
+/**
+ * @brief test function for output
+ * calls output function with a test value for link_util
+ * writes test link_util value to an test output file and then reads the value and verifies
+ * 
+ * @return Void
+ */
+void test_output() {
+    printf("Running output test...\n");
+
+    // Call the output function with a test value
+    double test_link_util = 0.75;
+    char test_filename[] = "test_output.txt";
+
+    output(test_filename, test_link_util);
+
+    // Validate the content of the output file
+    FILE *file = fopen(test_filename, "r");
+    if (file == NULL) {
+        printf("Error opening output file for validation\n");
+        return;
+    }
+
+    double read_link_util;
+    fscanf(file, "%lf", &read_link_util);
+
+    // Close the file
+    fclose(file);
+
+    // Check if the value written to the file matches the expected value
+    assert(read_link_util == test_link_util);
+
+    // Remove the temporary output file
+    remove(test_filename);
+
+    printf("output test completed.\n");
 }
 
 /**

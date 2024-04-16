@@ -74,12 +74,13 @@ Network* create_network(int N){
 }
 
 // Function prototypes
-void output(double link_util);
+void output(char* filename, double link_util);
 void readInput(char *filename, int *N, int *L, int *M, int **R, int *T);
 void add_nodes(Network* network, int N, int* R, int M);
 void simulate(Network* network, int T, int* R, int L);
 Network* create_network(int num_nodes);
 Node* create_node(int id, int R, int M);
+void test_output();
 void test_readInput();
 void test_add_nodes();
 
