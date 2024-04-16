@@ -83,5 +83,6 @@ Node* create_node(int id, int R, int M);
 void test_output();
 void test_readInput();
 void test_add_nodes();
+void test_simulate();
 
 #endif

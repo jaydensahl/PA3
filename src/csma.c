@@ -193,7 +193,7 @@ void simulate(Network* network, int T, int* R, int L){
         }
     }
     double link_util = (double)successful_transmissions / T;
-    printf("%.2f", link_util);
+    //printf("%.2f", link_util);
     output("output.txt", link_util);
 }
 
@@ -233,8 +233,9 @@ int main(int argc, char** argv) {
      */
     //test_readInput();
     //test_add_nodes();
-    test_output();
-    
+    //test_output();
+    //test_simulate();
+
     return(EXIT_SUCCESS);
 }
 
@@ -366,4 +367,43 @@ void test_add_nodes() {
     free(network);
 
     printf("add_nodes test completed.\n");
+}
+
+/**
+ * @brief test function for simulate
+ * creates a test network with test values for N, M, R, L, T
+ * calls add_nodes, and simulate functions and validates that output file exists afterwards
+ * 
+ * @return Void
+ */
+void test_simulate() {
+    printf("Running simulate test...\n");
+
+    // Create a network with 3 nodes
+    int N = 3;
+    Network* network = create_network(N);
+
+    // Initialize some sample values for R and M
+    int M = 5;
+    int R[] = {2, 4, 8};
+    int L = 10;
+    int T = 100;
+
+    // Add nodes to the network
+    add_nodes(network, N, R, M);
+
+    // Run simulation
+    simulate(network, T, R, L);
+
+    // Validate the output
+    // For now, just validate that the output file "output.txt" exists
+    FILE *file = fopen("output.txt", "r");
+    if (file == NULL) {
+        printf("Error opening output file for validation\n");
+        return;
+    }
+
+    fclose(file);
+
+    printf("simulate test completed.\n");
 }
