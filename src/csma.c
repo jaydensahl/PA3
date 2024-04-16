@@ -212,7 +212,6 @@ int main(int argc, char** argv) {
     }
 
     char* filename = argv[1];
-    //int length_R = 6; // this should not be a hardcoded value, needs to change
 
     //CALL CSMA FUNCTIONS HERE
     // Read configuration parameters from input file
