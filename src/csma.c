@@ -231,12 +231,13 @@ int main(int argc, char** argv) {
      * 
      */
     //test_readInput();
+    //test_add_nodes();
     
     return(EXIT_SUCCESS);
 }
 
 /**
- * @brief test readInput function
+ * @brief test function for readInput
  * creates test input file
  * calls readInput function and verifies the values read for N, L, M, R, T
  * 
@@ -283,4 +284,46 @@ void test_readInput() {
     remove("test_input.txt");
 
     printf("readInput test completed.\n");
+}
+
+/**
+ * @brief test function for add_nodes
+ * creates example network with test values for N, M and R
+ * calls add_nodes function and verifies if nodes parameters are set correctly
+ * 
+ * @return Void
+ */
+void test_add_nodes() {
+    printf("Running add_nodes test...\n");
+
+    // Create a network
+    int N = 3;
+    Network* network = create_network(N);
+
+    // Initialize some sample values
+    int M = 5;
+    int R[] = {2, 4, 8};
+
+    // Add nodes to the network
+    add_nodes(network, N, R, M);
+
+    // Validate the nodes were added correctly
+    for (int i = 0; i < N; i++) {
+        // Check if the node exists
+        assert(network->nodes[i] != NULL);
+
+        // Check if the node's parameters are set correctly
+        assert(network->nodes[i]->id == i);
+        assert(network->nodes[i]->R == R[0]); // Since we're using R[0] for all nodes in add_nodes
+        assert(network->nodes[i]->M == M);
+    }
+
+    // Free dynamically allocated memory for nodes
+    for (int i = 0; i < N; i++) {
+        free(network->nodes[i]);
+    }
+    free(network->nodes);
+    free(network);
+
+    printf("add_nodes test completed.\n");
 }
