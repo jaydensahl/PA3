@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 #include "csma_header.h"
 
 //global clock for all nodes
@@ -224,5 +225,62 @@ int main(int argc, char** argv) {
     simulate(network, T, R, L);
     // Evaluate network utilization
 
+    /**
+     * @brief calling test functions
+     * uncomment this block to test functions above
+     * 
+     */
+    //test_readInput();
+    
     return(EXIT_SUCCESS);
+}
+
+/**
+ * @brief test readInput function
+ * creates test input file
+ * calls readInput function and verifies the values read for N, L, M, R, T
+ * 
+ * @return Void
+ */
+void test_readInput() {
+    printf("Running readInput test...\n");
+    
+    // Create a temporary input file with test data
+    FILE *file = fopen("test_input.txt", "w");
+    if (file == NULL) {
+        printf("Error creating test input file\n");
+        return;
+    }
+    fprintf(file, "N 3\n");
+    fprintf(file, "L 10\n");
+    fprintf(file, "M 5\n");
+    fprintf(file, "R 2 4 8\n");
+    fprintf(file, "T 100\n");
+    fclose(file);
+
+    // expected values
+    int expected_N = 3, expected_L = 10, expected_M = 5, expected_R[] = {2, 4, 8}, expected_T = 100;
+    int length_expected_R = sizeof(expected_R) / sizeof(expected_R[0]);
+
+    // Call readInput to read from the test input file
+    int N, L, M, *R, T;
+    char filename[] = "test_input.txt";
+    readInput(filename, &N, &L, &M, &R, &T);
+
+    // Validate the read parameters
+    assert(N == expected_N);
+    assert(L == expected_L);
+    assert(M == expected_M);
+    assert(T == expected_T);
+    for (int i = 0; i < length_expected_R; i++) {
+        assert(R[i] == expected_R[i]);
+    }
+
+    // Free dynamically allocated memory for R
+    free(R);
+
+    // Remove the temporary input file
+    remove("test_input.txt");
+
+    printf("readInput test completed.\n");
 }
